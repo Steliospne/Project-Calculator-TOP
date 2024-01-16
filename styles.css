@@ -1,0 +1,33 @@
+* {
+    border: red solid 2px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    height: 99vh;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calc_container {
+    display: flex;
+    width: 600px;
+    height: 600px;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    padding: 8px
+}
+
+.calc_display {
+    width: 580px;
+    height: 200px;
+    margin-bottom: 8px;
+}
+
+.calc_numpad {
+    width: 580px;
+    height: auto;
+    flex: 1;
+}
