@@ -65,7 +65,7 @@ function operate(operator) {
 
 function calculate() {
     if (currentOperation === null || mustResetScreen) return;
-    if (firstOperand === "0") {
+    if (currentOperation == "÷" && firstOperand === "0") {
         display_current.textContent = "Error";
         return;
     }
