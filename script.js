@@ -18,6 +18,7 @@ clearButton.addEventListener("click", clearScreen);
 delButton.addEventListener("click", delNumber);
 calcButton.addEventListener("click", calculate);
 pointButton.addEventListener("click", addPoint);
+window.addEventListener('keydown', keyBoardSupport);
 
 numButtons.forEach((button) =>
     button.addEventListener("click", () => addNum(button.textContent))
@@ -99,4 +100,12 @@ function evaluate(operator, firstOperand, secondOperand) {
         default:
             return null;
     }
+}
+
+function keyBoardSupport(e) {
+    numButtons.forEach((button) => { if (button.textContent == e.key) addNum(e.key) })
+    opButtons.forEach((button) => { if (button.textContent == e.key) operate(e.key) })
+    if (e.key == 'Backspace' || e.key == 'Delete') delNumber()
+    if (e.key == 'Enter' || e.key == '=') calculate()
+    if (e.key == 'Escape') clearScreen()
 }
