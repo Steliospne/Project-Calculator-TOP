@@ -66,16 +66,31 @@ body {
     flex: 1;
 }
 
-.calc_functions {
+button.del-btn {
+    background-color: #db501d;
 }
 
 div > button {
     flex: 1;
     border-radius: 8px;
-    margin: 2px;
+    margin: 6px;
     font-size: 1.5em;
 }
 
 footer {
  margin-top: auto;
+}
+
+@media only screen and (max-width: 450px) {
+    .calc_container {
+        height: 450px;
+        width: 350px;
+    }
+    .calc_display {
+        height: 148.5px;
+        width: 330px;
+    } 
+    .calc_numpad {
+        width: 330px;
+    }
 }
