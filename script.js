@@ -80,7 +80,10 @@ function calculate() {
     currentOperation = null;
 }
 function convertOperator(operator) {
-    if (operator == "÷") return "/";
+    if (operator == "÷") return "/"
+    if (operator == "/") return "÷";
+    if (operator == "x") return "*"
+    if (operator == "*") return "x";
     return operator;
 }
 function evaluate(operator, firstOperand, secondOperand) {
@@ -104,7 +107,7 @@ function evaluate(operator, firstOperand, secondOperand) {
 
 function keyBoardSupport(e) {
     numButtons.forEach((button) => { if (button.textContent == e.key) addNum(e.key) })
-    opButtons.forEach((button) => { if (button.textContent == e.key) operate(e.key) })
+    opButtons.forEach((button) => { if (button.textContent == convertOperator(e.key)) operate(convertOperator(e.key)) })
     if (e.key == 'Backspace' || e.key == 'Delete') delNumber()
     if (e.key == 'Enter' || e.key == '=') calculate()
     if (e.key == 'Escape') clearScreen()
