@@ -18,7 +18,7 @@ clearButton.addEventListener("click", clearScreen);
 delButton.addEventListener("click", delNumber);
 calcButton.addEventListener("click", calculate);
 pointButton.addEventListener("click", addPoint);
-window.addEventListener('keydown', keyBoardSupport);
+window.addEventListener("keydown", keyBoardSupport);
 
 numButtons.forEach((button) =>
     button.addEventListener("click", () => addNum(button.textContent))
@@ -28,6 +28,7 @@ opButtons.forEach((button) =>
 );
 
 function addNum(number) {
+    if (display_current.textContent.length >= 12) return;
     if (display_current.textContent === "0" || mustResetScreen) resetScreen();
     display_current.textContent += number;
 }
@@ -65,12 +66,12 @@ function operate(operator) {
 }
 
 function calculate() {
+    secondOperand = display_current.textContent;
     if (currentOperation === null || mustResetScreen) return;
-    if (currentOperation == "÷" && firstOperand === "0") {
+    if (currentOperation == "÷" && secondOperand === "0") {
         display_current.textContent = "Error";
         return;
     }
-    secondOperand = display_current.textContent;
     display_current.textContent = evaluate(
         convertOperator(currentOperation),
         firstOperand,
@@ -80,9 +81,9 @@ function calculate() {
     currentOperation = null;
 }
 function convertOperator(operator) {
-    if (operator == "÷") return "/"
+    if (operator == "÷") return "/";
     if (operator == "/") return "÷";
-    if (operator == "x") return "*"
+    if (operator == "x") return "*";
     if (operator == "*") return "x";
     return operator;
 }
@@ -106,9 +107,14 @@ function evaluate(operator, firstOperand, secondOperand) {
 }
 
 function keyBoardSupport(e) {
-    numButtons.forEach((button) => { if (button.textContent == e.key) addNum(e.key) })
-    opButtons.forEach((button) => { if (button.textContent == convertOperator(e.key)) operate(convertOperator(e.key)) })
-    if (e.key == 'Backspace' || e.key == 'Delete') delNumber()
-    if (e.key == 'Enter' || e.key == '=') calculate()
-    if (e.key == 'Escape') clearScreen()
+    numButtons.forEach((button) => {
+        if (button.textContent == e.key) addNum(e.key);
+    });
+    opButtons.forEach((button) => {
+        if (button.textContent == convertOperator(e.key))
+            operate(convertOperator(e.key));
+    });
+    if (e.key == "Backspace" || e.key == "Delete") delNumber();
+    if (e.key == "Enter" || e.key == "=") calculate();
+    if (e.key == "Escape") clearScreen();
 }
