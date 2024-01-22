@@ -28,8 +28,8 @@ opButtons.forEach((button) =>
 );
 
 function addNum(number) {
-    if (display_current.textContent.length >= 12) return;
     if (display_current.textContent === "0" || mustResetScreen) resetScreen();
+    if (display_current.textContent.length >= 12) return;
     display_current.textContent += number;
 }
 
@@ -92,18 +92,34 @@ function evaluate(operator, firstOperand, secondOperand) {
     b = Number(secondOperand);
     switch (operator) {
         case "+":
-            return a + b;
+            return bigNum(a + b);
         case "-":
             return a - b;
         case "*":
-            return a * b;
+            return bigNum(a * b);
         case "/":
             if (b === 0) return null;
-            else return (a / b).toFixed(3);
+            else return (a / b);
 
         default:
             return null;
     }
+}
+
+function bigNum(num) {
+    if (String(num).includes('e')) return num
+    let temp = String(num);
+    let tempa = "";
+    let tempb = "";
+    if (temp.length > 12) {
+        tempa = temp.slice(0, 1);
+        tempb = temp.slice(1);
+        tempa += ".";
+        a = tempa + tempb;
+        b = tempb.length;
+        return `${Number(a)}e${b}`;
+    }
+    return num;
 }
 
 function keyBoardSupport(e) {
