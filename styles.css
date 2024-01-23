@@ -3,6 +3,7 @@
 } */
 
 body {
+    font-family: "Roboto";
     display: flex;
     justify-content: center;
     height: 98vh;
@@ -21,7 +22,7 @@ body {
     position: absolute;
     border: black solid 2px;
     border-radius: 6px;
-    background-color: antiquewhite;
+    background-color: #6962ad;
 }
 
 .calc_display {
@@ -52,6 +53,7 @@ body {
 }
 
 .calc_numpad {
+
     display: flex;
     width: 480px;
     height: auto;
@@ -60,7 +62,11 @@ body {
     padding: 8px;
 }
 
-.calc_numpad > div {
+.calc_numpad>div>button {
+    font-family: "Roboto";
+}
+
+.calc_numpad>div {
     display: flex;
     flex-direction: row;
     flex: 1;
@@ -70,7 +76,7 @@ button.del-btn {
     background-color: #db501d;
 }
 
-div > button {
+div>button {
     flex: 1;
     border-radius: 8px;
     margin: 6px;
@@ -78,21 +84,39 @@ div > button {
 }
 
 footer {
- margin-top: auto;
+    margin-top: auto;
+}
+
+.calc_display,
+.clear-btn,
+.point-btn,
+.calculate-btn {
+    background-color: #96E9C6;
+}
+
+.num-btn {
+    background-color: #83C0C1;
+}
+
+.operator-btn {
+    background-color: #F8E559;
 }
 
 @media only screen and (max-width: 450px) {
     html {
         font-size: 12px;
     }
+
     .calc_container {
         height: 450px;
         width: 350px;
     }
+
     .calc_display {
         height: 148.5px;
         width: 330px;
-    } 
+    }
+
     .calc_numpad {
         width: 330px;
     }
