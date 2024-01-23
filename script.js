@@ -92,31 +92,37 @@ function evaluate(operator, firstOperand, secondOperand) {
     b = Number(secondOperand);
     switch (operator) {
         case "+":
-            return bigNum(a + b);
+            return eNotation(a + b);
         case "-":
-            return a - b;
+            return eNotation(a - b);
         case "*":
-            return bigNum(a * b);
+            return eNotation(a * b);
         case "/":
             if (b === 0) return null;
-            else return (a / b);
+            else return eNotation(a / b);
 
         default:
             return null;
     }
 }
 
-function bigNum(num) {
-    if (String(num).includes('e')) return num
-    let temp = String(num);
-    let tempa = "";
-    let tempb = "";
-    if (temp.length > 12) {
-        tempa = temp.slice(0, 1);
-        tempb = temp.slice(1);
-        tempa += ".";
-        a = tempa + tempb;
-        b = tempb.length;
+function eNotation(num) {
+    if (String(num).includes("e")) return num;
+    let string = String(num);
+    let beforePoint = "";
+    let afterPoint = "";
+    if (string.length > 12) {
+        beforePoint = string.slice(0, 1);
+        afterPoint = string.slice(1);
+        if (afterPoint.includes(".")) {
+            beforePoint += ".";
+            a = beforePoint + afterPoint.replace(".", "");
+            b = afterPoint.indexOf(".");
+        } else {
+            beforePoint += ".";
+            a = beforePoint + afterPoint;
+            b = afterPoint.length;
+        }
         return `${Number(a)}e${b}`;
     }
     return num;
@@ -133,4 +139,5 @@ function keyBoardSupport(e) {
     if (e.key == "Backspace" || e.key == "Delete") delNumber();
     if (e.key == "Enter" || e.key == "=") calculate();
     if (e.key == "Escape") clearScreen();
+    if (e.key == ".") addPoint();
 }
